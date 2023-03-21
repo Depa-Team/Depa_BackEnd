@@ -25,4 +25,9 @@ public class PlanDomain : IPlanDomain
     {
         return await _PlanRepository.update(id, plan);
     }
+
+    public async Task<bool> delete(int id)
+    {
+        return await _PlanRepository.delete(id);
+    }
 }

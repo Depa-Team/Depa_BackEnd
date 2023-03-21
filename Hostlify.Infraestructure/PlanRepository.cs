@@ -67,6 +67,25 @@ public class PlanRepository: IPlanRepository
         return true;
     }
 
+    public async Task<bool> delete(int id)
+    {
+        using (var transacction = await _hostlifyDb.Database.BeginTransactionAsync())
+        {
+            try
+            {
+                var plan = await _hostlifyDb.Plans.FindAsync(id);
+                plan.IsActive = false;
+                plan.DateUpdated = DateTime.Now;
+                _hostlifyDb.Plans.Update(plan);
+                await _hostlifyDb.SaveChangesAsync();
+                _hostlifyDb.Database.CommitTransactionAsync();
+            }
+            catch (Exception ex)
+            {
+                await _hostlifyDb.Database.RollbackTransactionAsync();
+            }
+        }
 
-
+        return true;
+    }
 }

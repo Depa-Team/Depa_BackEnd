@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Mime;
-using System.Threading.Tasks;
-using AutoMapper;
-using Hostlify.API.Filter;
+﻿using AutoMapper;
 using Hostlify.API.Resource;
+using Hostlify.API.Resources;
 using Hostlify.Domain;
 using Hostlify.Infraestructure;
-using Microsoft.AspNetCore.Http;
+using Hostlify.Infraestructure.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Net.Mime;
 
 namespace Hostlify.API.Controllers
 {
@@ -29,12 +26,13 @@ namespace Hostlify.API.Controllers
         }
 
         [HttpGet("GetAll")]
+        [AllowAnonymous]
         public async Task<IActionResult> Get() 
         {
             try
             {
                 var result = await _historyDomain.getAll();
-                return Ok(_mapper.Map<List<History>, List<HistoryResource>>(result));
+                return Ok(_mapper.Map<List<History>, List<HistoryResourceGet>>(result));
             }
             catch (Exception exception)
             {
@@ -48,27 +46,30 @@ namespace Hostlify.API.Controllers
 
         
         [HttpGet]
+        [AllowAnonymous]
         [Route("byManagerId")]
-        public  async Task<IActionResult> GetHistoryForManagerId(int managerId)
+        public  async Task<List<HistoryResourceGet>> GetHistoryForManagerId(int managerId)
         {
-            try
+            List<HistoryResourceGet> historyResourceList = new List<HistoryResourceGet>();
+            var result = _historyDomain.getHistoryForManagerId(managerId).Result.ToArray();
+            foreach (var historyResource in result)
             {
-                if (managerId == 0)
-                {
-                    return BadRequest("ManagerId");
-                }
-
-                var result = await _historyDomain.getHistoryForManagerId(managerId);
-                return Ok(_mapper.Map<History, HistoryResource>(result));
+                var history_ = new History();
+                history_.id = historyResource.id;
+                history_.flatName= historyResource.flatName;   
+                history_.managerId=historyResource.managerId;
+                history_.guestName= historyResource.guestName;
+                history_.initialDate= historyResource.initialDate;
+                history_.endDate= historyResource.endDate;
+                history_.price= historyResource.price;
+                historyResourceList.Add(_mapper.Map<History, HistoryResourceGet>(history_));
             }
-            catch (Exception ex)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, "Error al procesar");
-            }
+            return historyResourceList;
         } 
         
-        [HttpPost] 
-        [Route("byResource")]
+        [HttpPost]
+        [AllowAnonymous]
+        [Route("Post")]
         public async Task<IActionResult>  Post([FromBody] HistoryResource historyInput)
         {
             try
@@ -91,6 +92,7 @@ namespace Hostlify.API.Controllers
 
         // DELETE
         [HttpDelete("{id}")]
+        [AllowAnonymous]
         public async Task<IActionResult> Delete(int id)
         {
             try

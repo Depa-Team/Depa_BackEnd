@@ -2,13 +2,15 @@ using System.Net.Mime;
 using AutoMapper;
 using Hostlify.API.Filter;
 using Hostlify.API.Resource;
+using Hostlify.API.Resources;
 using Hostlify.Domain;
 using Hostlify.Infraestructure;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Hostlify.API.Controllers
 {
-    [Authorize]
+    
     [Route("api/[controller]")]
     [ApiController]
     [Produces(MediaTypeNames.Application.Json)]
@@ -24,6 +26,8 @@ namespace Hostlify.API.Controllers
         }
         
         [HttpPost]
+        [AllowAnonymous]
+        [Route("Post")]
         public async Task<IActionResult> Post([FromBody] PlanResource planInput)
         {
             try
@@ -50,13 +54,29 @@ namespace Hostlify.API.Controllers
         
         // GET: api/Plans
         [HttpGet]
-        public async Task<List<Plan>> Get()
+        [AllowAnonymous]
+        public async Task<List<PlanResourceGet>> Get()
         {
-            return await _planDomain.getAll();
+            List<PlanResourceGet> planResourceList = new List<PlanResourceGet>();
+            var result = _planDomain.getAll().Result.ToArray();
+            foreach (var planResource in result)
+            {
+                var plan_ = new Plan();
+                plan_.Name = planResource.Name;
+                plan_.Id = planResource.Id;
+                plan_.Rooms = planResource.Rooms;
+                plan_.Price = planResource.Price;
+                plan_.DateCreated = planResource.DateCreated;
+                plan_.DateUpdated = planResource.DateUpdated;
+                plan_.IsActive = planResource.IsActive;
+                planResourceList.Add(_mapper.Map<Plan, PlanResourceGet>(plan_));
+            }
+            return planResourceList;
         }
 
         // PUT: api/Plans/5
         [HttpPut("{id}")]
+        [AllowAnonymous]
         public async Task<IActionResult> Put(int id, [FromBody] PlanResource planInput)
         {
             try
@@ -70,6 +90,23 @@ namespace Hostlify.API.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, "Error al procesar: "+ex);
             }
         }
-        
+
+
+        // Delete: api/Plans/5
+        [HttpDelete("{id}")]
+        [AllowAnonymous]
+        public async Task<IActionResult> DeletePlan(int id)
+        {
+            try
+            {
+                var result = await _planDomain.delete(id);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error al procesar");
+            }
+        }
+
     }
 }

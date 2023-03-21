@@ -19,61 +19,6 @@ namespace Hostlify.Infraestructure.Migrations
                 .HasAnnotation("ProductVersion", "6.0.10")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
-            modelBuilder.Entity("Hostlify.Infraestructure.FoodServices", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<string>("Cream")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<int>("CreamQuantity")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("DateCreated")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2022, 11, 21, 20, 34, 59, 647, DateTimeKind.Local).AddTicks(8277));
-
-                    b.Property<DateTime?>("DateUpdated")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<string>("Dish")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<int>("DishQuantity")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Drink")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<int>("DrinkQuantity")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Instruction")
-                        .HasMaxLength(999)
-                        .HasColumnType("varchar(999)");
-
-                    b.Property<bool>("IsActive")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("tinyint(1)")
-                        .HasDefaultValue(true);
-
-                    b.Property<int>("ManagerID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("RoomID")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("FoodServices", (string)null);
-                });
-
             modelBuilder.Entity("Hostlify.Infraestructure.History", b =>
                 {
                     b.Property<int>("id")
@@ -83,7 +28,7 @@ namespace Hostlify.Infraestructure.Migrations
                     b.Property<DateTime>("DateCreated")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2022, 11, 21, 20, 34, 59, 647, DateTimeKind.Local).AddTicks(7355));
+                        .HasDefaultValue(new DateTime(2023, 3, 20, 20, 28, 1, 475, DateTimeKind.Local).AddTicks(957));
 
                     b.Property<DateTime?>("DateUpdated")
                         .HasColumnType("datetime(6)");
@@ -93,12 +38,14 @@ namespace Hostlify.Infraestructure.Migrations
                         .HasColumnType("tinyint(1)")
                         .HasDefaultValue(true);
 
-                    b.Property<string>("description")
-                        .HasColumnType("longtext");
-
                     b.Property<string>("endDate")
                         .IsRequired()
                         .HasColumnType("longtext");
+
+                    b.Property<string>("flatName")
+                        .IsRequired()
+                        .HasMaxLength(15)
+                        .HasColumnType("varchar(15)");
 
                     b.Property<string>("guestName")
                         .IsRequired()
@@ -114,14 +61,58 @@ namespace Hostlify.Infraestructure.Migrations
                     b.Property<int>("price")
                         .HasColumnType("int");
 
-                    b.Property<string>("roomName")
+                    b.HasKey("id");
+
+                    b.ToTable("History", (string)null);
+                });
+
+            modelBuilder.Entity("Hostlify.Infraestructure.Models.Flat", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("DateCreated")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime(6)")
+                        .HasDefaultValue(new DateTime(2023, 3, 20, 20, 28, 1, 475, DateTimeKind.Local).AddTicks(215));
+
+                    b.Property<DateTime?>("DateUpdated")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("EndDate")
+                        .HasColumnType("longtext");
+
+                    b.Property<int?>("GuestId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Initialdate")
+                        .HasColumnType("longtext");
+
+                    b.Property<bool>("IsActive")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("tinyint(1)")
+                        .HasDefaultValue(true);
+
+                    b.Property<int>("ManagerId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("Price")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("Status")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("tinyint(1)")
+                        .HasDefaultValue(true);
+
+                    b.Property<string>("flatName")
                         .IsRequired()
                         .HasMaxLength(15)
                         .HasColumnType("varchar(15)");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
-                    b.ToTable("History", (string)null);
+                    b.ToTable("Flats", (string)null);
                 });
 
             modelBuilder.Entity("Hostlify.Infraestructure.Plan", b =>
@@ -133,7 +124,7 @@ namespace Hostlify.Infraestructure.Migrations
                     b.Property<DateTime>("DateCreated")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2022, 11, 21, 20, 34, 59, 647, DateTimeKind.Local).AddTicks(3733));
+                        .HasDefaultValue(new DateTime(2023, 3, 20, 20, 28, 1, 474, DateTimeKind.Local).AddTicks(8203));
 
                     b.Property<DateTime?>("DateUpdated")
                         .HasColumnType("datetime(6)");
@@ -159,75 +150,6 @@ namespace Hostlify.Infraestructure.Migrations
                     b.ToTable("Plans", (string)null);
                 });
 
-            modelBuilder.Entity("Hostlify.Infraestructure.Room", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("DateCreated")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2022, 11, 21, 20, 34, 59, 647, DateTimeKind.Local).AddTicks(6517));
-
-                    b.Property<DateTime?>("DateUpdated")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<string>("Description")
-                        .HasMaxLength(999)
-                        .HasColumnType("varchar(999)");
-
-                    b.Property<bool>("Emergency")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("tinyint(1)")
-                        .HasDefaultValue(false);
-
-                    b.Property<string>("EndDate")
-                        .HasColumnType("longtext");
-
-                    b.Property<int?>("GuestId")
-                        .HasColumnType("int");
-
-                    b.Property<bool?>("GuestStayComplete")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<string>("Image")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("Initialdate")
-                        .HasColumnType("longtext");
-
-                    b.Property<bool>("IsActive")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("tinyint(1)")
-                        .HasDefaultValue(true);
-
-                    b.Property<int>("ManagerId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("Price")
-                        .HasColumnType("int");
-
-                    b.Property<string>("RoomName")
-                        .IsRequired()
-                        .HasMaxLength(15)
-                        .HasColumnType("varchar(15)");
-
-                    b.Property<bool>("ServicePending")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("tinyint(1)")
-                        .HasDefaultValue(false);
-
-                    b.Property<bool>("Status")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("tinyint(1)")
-                        .HasDefaultValue(true);
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Rooms", (string)null);
-                });
-
             modelBuilder.Entity("Hostlify.Infraestructure.User", b =>
                 {
                     b.Property<int>("Id")
@@ -237,7 +159,7 @@ namespace Hostlify.Infraestructure.Migrations
                     b.Property<DateTime>("DateCreated")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2022, 11, 21, 20, 34, 59, 647, DateTimeKind.Local).AddTicks(4802));
+                        .HasDefaultValue(new DateTime(2023, 3, 20, 20, 28, 1, 474, DateTimeKind.Local).AddTicks(9268));
 
                     b.Property<DateTime?>("DateUpdated")
                         .HasColumnType("datetime(6)");
@@ -265,6 +187,10 @@ namespace Hostlify.Infraestructure.Migrations
                     b.Property<string>("Type")
                         .IsRequired()
                         .HasColumnType("longtext");
+
+                    b.Property<int?>("phoneNumber")
+                        .IsRequired()
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 

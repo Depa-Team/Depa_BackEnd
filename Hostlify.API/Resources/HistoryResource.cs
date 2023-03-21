@@ -5,7 +5,8 @@ namespace Hostlify.API.Resource;
 public class HistoryResource
 {
     [Required]
-    public string roomName { get; set; }
+
+    public string flatName { get; set; }
     public int managerId { get; set; }
 
     public string guestName { get; set; }

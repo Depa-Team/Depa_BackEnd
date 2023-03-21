@@ -8,4 +8,5 @@ public class User: BaseModel
     public string Email { get; set; }
     public string Type { get; set; }
     public string? Plan { get; set; }
+    public int? phoneNumber { get; set; }
 }

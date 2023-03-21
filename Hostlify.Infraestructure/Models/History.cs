@@ -4,7 +4,7 @@ public class History : BaseModel
 {
     public int id { get; set; }
 
-    public string roomName { get; set; }
+    public string flatName { get; set; }
     public int managerId { get; set; }
 
     public string guestName { get; set; }
@@ -14,6 +14,4 @@ public class History : BaseModel
     public string endDate { get; set; }
 
     public int price { get; set; }
-
-    public string? description { get; set; }
 }

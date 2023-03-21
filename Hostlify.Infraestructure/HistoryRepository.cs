@@ -46,10 +46,10 @@ public class HistoryRepository : IHistoryRepository
     }
 
 
-    public async Task<History> getHistoryForManagerId(int managerId)                
+    public async Task<List<History>> getHistoryForManagerId(int managerId)                
     {
-        return await _hostlifyDb.History
-            .SingleOrDefaultAsync(history => history.managerId == managerId); 
+        return await _hostlifyDb.History.Where(history => history.IsActive == true&& history.managerId==managerId)
+           .ToListAsync();
     }
 
     public async Task<bool> deleteHistory(int id)

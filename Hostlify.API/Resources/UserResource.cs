@@ -7,4 +7,7 @@ public class UserResource
     public string Type { get; set; }
     public string Email { get; set; }
     public string Plan { get; set; }
+    public int phoneNumber { get; set; }
+
+
 }

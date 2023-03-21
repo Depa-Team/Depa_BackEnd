@@ -1,5 +1,6 @@
 using AutoMapper;
 using Hostlify.API.Resource;
+using Hostlify.API.Resources;
 using Hostlify.Domain;
 using Hostlify.Infraestructure;
 using Microsoft.AspNetCore.Authorization;
@@ -47,9 +48,26 @@ namespace Hostlify.API.Controllers
         [HttpGet]
         [AllowAnonymous]
         [ProducesResponseType(typeof(IEnumerable<string>), 200)]
-        public async Task<List<User>> Get()
+        public async Task<List<UserResourceGet>> Get()
         {
-            return await _userDomain.GetAllUsers();
+            List<UserResourceGet> userResourceList = new List<UserResourceGet>();
+            var result = _userDomain.GetAllUsers().Result.ToArray();
+            foreach (var userResource in result)
+            {
+                var user_ = new User();
+                user_.Name = userResource.Name;
+                user_.Id = userResource.Id;
+                user_.Email = userResource.Email;
+                user_.Type = userResource.Type;
+                user_.Plan = userResource.Plan;
+                user_.Password = userResource.Password;
+                user_.phoneNumber = userResource.phoneNumber;
+                user_.DateCreated = userResource.DateCreated;
+                user_.DateUpdated = userResource.DateUpdated;
+                user_.IsActive = userResource.IsActive;
+                userResourceList.Add(_mapper.Map<User, UserResourceGet>(user_));
+            }
+            return userResourceList;
         }
         
 
@@ -57,19 +75,23 @@ namespace Hostlify.API.Controllers
         [AllowAnonymous]
         [ProducesResponseType(typeof(string), 200)]
         [HttpGet("{id}", Name = "Get")]
-        public async Task<User> Get(int id)
+        public async Task<UserResourceGet> Get(int id)
         {
-            return await _userDomain.GetByUserId(id);
+            User user_ = new User();
+            var result = await _userDomain.GetByUserId(id);
+            user_.Id = result.Id;
+            user_.Name = result.Name;
+            user_.Email = result.Email;
+            user_.Type = result.Type;
+            user_.Plan = result.Plan;
+            user_.Password = result.Password;
+            user_.phoneNumber = result.phoneNumber;
+            user_.DateCreated=result.DateCreated;
+            user_.DateUpdated=result.DateUpdated;
+            user_.IsActive = result.IsActive;
+            return _mapper.Map<User,UserResourceGet>(user_);
         }
         
-
-        // PUT: api/User/5
-        /*[AllowAnonymous]
-        [HttpPut("{id}")]
-        [ProducesResponseType(typeof(void), 200)]
-        public void Put(int id, [FromBody] string value)
-        {
-        }*/
 
         // DELETE: api/User/5
         [AllowAnonymous]
