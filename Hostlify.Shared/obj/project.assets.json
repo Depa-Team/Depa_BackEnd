@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\DIEGO\\OneDrive\\Escritorio\\Hostlify-Back-End\\Hostlify.Shared\\Hostlify.Shared.csproj",
+      "projectUniqueName": "C:\\Users\\DIEGO\\Desktop\\Depa_BackEnd\\Hostlify.Shared\\Hostlify.Shared.csproj",
       "projectName": "Hostlify.Shared",
-      "projectPath": "C:\\Users\\DIEGO\\OneDrive\\Escritorio\\Hostlify-Back-End\\Hostlify.Shared\\Hostlify.Shared.csproj",
+      "projectPath": "C:\\Users\\DIEGO\\Desktop\\Depa_BackEnd\\Hostlify.Shared\\Hostlify.Shared.csproj",
       "packagesPath": "C:\\Users\\DIEGO\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\DIEGO\\OneDrive\\Escritorio\\Hostlify-Back-End\\Hostlify.Shared\\obj\\",
+      "outputPath": "C:\\Users\\DIEGO\\Desktop\\Depa_BackEnd\\Hostlify.Shared\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\DIEGO\\AppData\\Roaming\\NuGet\\NuGet.Config",

@@ -11091,11 +11091,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\DIEGO\\OneDrive\\Escritorio\\Hostlify-Back-End\\Hostlify.API\\Hostlify.API.csproj",
+      "projectUniqueName": "C:\\Users\\DIEGO\\Desktop\\Depa_BackEnd\\Hostlify.API\\Hostlify.API.csproj",
       "projectName": "Hostlify.API",
-      "projectPath": "C:\\Users\\DIEGO\\OneDrive\\Escritorio\\Hostlify-Back-End\\Hostlify.API\\Hostlify.API.csproj",
+      "projectPath": "C:\\Users\\DIEGO\\Desktop\\Depa_BackEnd\\Hostlify.API\\Hostlify.API.csproj",
       "packagesPath": "C:\\Users\\DIEGO\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\DIEGO\\OneDrive\\Escritorio\\Hostlify-Back-End\\Hostlify.API\\obj\\",
+      "outputPath": "C:\\Users\\DIEGO\\Desktop\\Depa_BackEnd\\Hostlify.API\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\DIEGO\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -11112,14 +11112,14 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Users\\DIEGO\\OneDrive\\Escritorio\\Hostlify-Back-End\\Hostlify.Domain\\Hostlify.Domain.csproj": {
-              "projectPath": "C:\\Users\\DIEGO\\OneDrive\\Escritorio\\Hostlify-Back-End\\Hostlify.Domain\\Hostlify.Domain.csproj"
+            "C:\\Users\\DIEGO\\Desktop\\Depa_BackEnd\\Hostlify.Domain\\Hostlify.Domain.csproj": {
+              "projectPath": "C:\\Users\\DIEGO\\Desktop\\Depa_BackEnd\\Hostlify.Domain\\Hostlify.Domain.csproj"
             },
-            "C:\\Users\\DIEGO\\OneDrive\\Escritorio\\Hostlify-Back-End\\Hostlify.Infraestructure\\Hostlify.Infraestructure.csproj": {
-              "projectPath": "C:\\Users\\DIEGO\\OneDrive\\Escritorio\\Hostlify-Back-End\\Hostlify.Infraestructure\\Hostlify.Infraestructure.csproj"
+            "C:\\Users\\DIEGO\\Desktop\\Depa_BackEnd\\Hostlify.Infraestructure\\Hostlify.Infraestructure.csproj": {
+              "projectPath": "C:\\Users\\DIEGO\\Desktop\\Depa_BackEnd\\Hostlify.Infraestructure\\Hostlify.Infraestructure.csproj"
             },
-            "C:\\Users\\DIEGO\\OneDrive\\Escritorio\\Hostlify-Back-End\\Hostlify.Shared\\Hostlify.Shared.csproj": {
-              "projectPath": "C:\\Users\\DIEGO\\OneDrive\\Escritorio\\Hostlify-Back-End\\Hostlify.Shared\\Hostlify.Shared.csproj"
+            "C:\\Users\\DIEGO\\Desktop\\Depa_BackEnd\\Hostlify.Shared\\Hostlify.Shared.csproj": {
+              "projectPath": "C:\\Users\\DIEGO\\Desktop\\Depa_BackEnd\\Hostlify.Shared\\Hostlify.Shared.csproj"
             }
           }
         }
